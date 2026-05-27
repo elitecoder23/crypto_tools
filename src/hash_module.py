@@ -14,7 +14,7 @@ def hash_sha256(text: str) -> str:
     """Hash a string using sha256"""
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-def hash_with_salt(password: str, salt: bytes = None) -> tuple[str, str]:
+def hash_with_salt(password: str, salt: bytes | None = None) -> tuple[str, str]:
     """hash a password with a random salt using sha256"""
     if salt is None:
         salt = os.urandom(32)
