@@ -1,0 +1,47 @@
+from src.base64_module import encode, decode
+from src.hash_module import hash_md5, hash_sha1, hash_sha256, hash_with_salt, verify_password
+from src.fernet_module import generate_key, save_key, load_key, encrypt, decrypt
+
+def print_menu() -> None:
+    """Display the main menu"""
+    print("\n=== Crypto Tool ===")
+    print("1. Base64 encode")
+    print("2. Base64 decode")
+    print("3. Hash a string (MD5 / SHA1 / SHA256)")
+    print("4. Hash a password with salt")
+    print("5. Verify a password against a hash")
+    print("6. Generate and save a Fernet key")
+    print("7. Encrypt a message")
+    print("8. Decrypt a message")
+    print("9. Exit")
+    print("===================")
+
+def handle_base64_encode() -> None:
+    """Handle Base64 encode option"""
+    text = input("Enter text to encode: ")
+    print(f"Encoded: {encode(text)}")
+
+def handle_base64_decode() -> None:
+    """Handle Base64 decode option"""
+    text = input("Enter Base64 value to decode to plaintext: ")
+    try:
+        print(f"Decoded: {decode(text)}")
+    except ValueError as e:
+        print(f"Error": {e})
+
+def handle_hash() -> None:
+    """Handle the hashing option"""
+    text = input("Enter the text to hash: ")
+    print(f"MD5: {hash_md5(text)}")
+    print(f"SHA1: {hash_sha1(text)}")
+    print(f"SHA256: {hash_sha256(text)}")
+
+def handle_salted_hash() -> None:
+    """Handle salted password hashing option"""
+    password = input("Type in your password to hash: ")
+    hex_hash, hex_salt = hash_with_salt(password)
+    print(f"Hash: {hex_hash}")
+    print(f"Salt: {hex_salt}")
+    print("Store both the hash and the salt to verify later")
+
+
