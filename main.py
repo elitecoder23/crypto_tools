@@ -44,4 +44,32 @@ def handle_salted_hash() -> None:
     print(f"Salt: {hex_salt}")
     print("Store both the hash and the salt to verify later")
 
+def handle_password_verification() -> None:
+    """Handle password verification option"""
+    password = input("Type in your password to be verified: ")
+    hex_hash = input("Enter stored hash: ")
+    hex_salt = input("Enter stored salt: ")
+
+    try:
+        result = verify_password(password, hex_hash, hex_salt)
+        print("Password match: True" if result else "Password match: False")
+    except ValueError as e:
+        print(f"Error: {e}")
+
+def handle_generate_key() -> None:
+    """Handle the fernet key generation"""
+    key = generate_key()
+    save_key(key)
+    print("Key generated and saved to secret.key file")
+
+def handle_encrypt() -> None:
+    """Handle message encryption option"""
+    try:
+        key = load_key()
+        message = input("Enter message to encrypt: ")
+        print(f"Here is your encrypted message: {encrypt(message, key)}")
+    except FileNotFoundError as e:
+        print(f"Error: {e} -- run option 6 first to generate a key")
+    except ValueError as e:
+        print(f"Error: {e}")
 
